@@ -4,9 +4,10 @@ var methodOverride = require("method-override");
 
 var app = express();
 
+var PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+/* app.use(bodyParser.json({ type: 'application/vnd.api+json' })); */
 
 app.use(methodOverride("_method"));
 var exphbs = require("express-handlebars");
@@ -20,8 +21,14 @@ app.use(express.static('./public'));
  
 require("./controllers/burgers_controller.js")(app);
 
-app.set('port', process.env.PORT);
+/* app.set('port', process.env.PORT);
 
 app.listen(app.get('port'), () => {
     console.log(`Express app listening on ${app.get('port')}`);
+}); */
+
+app.listen(PORT, function() {
+    // Log (server-side) when our server has started
+    console.log("Server listening on: http://localhost:" + PORT);
 });
+  
